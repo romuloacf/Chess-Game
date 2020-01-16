@@ -12,17 +12,18 @@ namespace tabuleiro
         public Tabuleiro Tab { get; protected set; }
 
         //Construtor inicia os valores.
-        public Peca (Posicao posicao, Cor cor, Tabuleiro tab)
+        public Peca(Cor cor, Tabuleiro tab)
         {
-            this.Posicao = posicao;
+            this.Posicao = null;
             this.Cor = cor;
             this.Tab = tab;
             this.QtdMovimentos = 0;
         }
 
-
-
-
-
+        public Peca(Tabuleiro tab, Cor cor)
+        {
+            Tab = tab;
+            Cor = cor;
+        }
     }
 }

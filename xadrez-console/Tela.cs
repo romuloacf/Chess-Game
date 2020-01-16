@@ -6,8 +6,7 @@ using tabuleiro;
 namespace xadrez_console
 {
     class Tela
-    {
-        
+    {       
         public static void imprimirTabuleiro(Tabuleiro tab)
         {
             for (int i=0; i<tab.Linhas; i++)
@@ -21,11 +20,12 @@ namespace xadrez_console
                     else
                     {
                         Console.Write(tab.Peca(i, j) + " ");                   
-                    }
-                    
+                    }                   
                 }
                 Console.WriteLine();
             }
+
+
             
         
         }
