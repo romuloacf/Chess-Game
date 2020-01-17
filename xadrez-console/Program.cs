@@ -8,25 +8,26 @@ namespace xadrez_console
     {
         static void Main(string[] args)
         {
-            /* Tabuleiro tab = new Tabuleiro(8, 8);
-              tab.ColocarPeca(new Torre(tab, Cor.Preta), new Posicao(0, 0));
-              tab.ColocarPeca(new Torre(tab, Cor.Preta), new Posicao(1, 3));
-              tab.ColocarPeca(new Rei(tab, Cor.Preta), new Posicao(0, 2));
-              Tela.imprimirTabuleiro(tab);
-              Console.ReadLine();*/
+            try
+            {
+                Tabuleiro tab = new Tabuleiro(8, 8);
 
-            Console.WriteLine("Entre com pos char:");
-            char ch = char.Parse(Console.ReadLine());
-            Console.WriteLine("Entre com pos number:");
-            int num = int.Parse(Console.ReadLine());            
-            
-            PosicaoXadrez pos = new PosicaoXadrez(ch, num);
+                tab.ColocarPeca(new Torre(tab, Cor.Preta), new Posicao(0, 0));
 
-            Console.WriteLine(pos);
-            Console.WriteLine(pos.ToPosicao());
+                tab.ColocarPeca(new Torre(tab, Cor.Preta), new Posicao(1, 3));
+                tab.ColocarPeca(new Rei(tab, Cor.Preta), new Posicao(0, 2));
 
+                tab.ColocarPeca(new Torre(tab, Cor.Branca), new Posicao(3, 5));
 
-            Console.ReadLine();
+                Tela.imprimirTabuleiro(tab);
+                Console.ReadLine();
+
+            }
+
+            catch(TabuleiroException e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
 
 
