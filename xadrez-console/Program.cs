@@ -24,9 +24,19 @@ namespace xadrez_console
                 {
 
                     Console.Clear();
-                    Tela.imprimirTabuleiro(partida.Tab);
+                    Tela.ImprimirTabuleiro(partida.Tab);
+                    Console.WriteLine();
+
                     Console.Write("Posição Origem:");
                     Posicao origem = Tela.LerPosicaoXadrez().ToPosicao();
+
+                    bool[,] posicoesPossiveis = partida.Tab.Peca(origem).MovimentosPossiveis();
+                    
+                    Console.Clear();
+                    //imprimir as posições marcadas
+                    Tela.ImprimirTabuleiro(partida.Tab, posicoesPossiveis);
+
+                    Console.WriteLine();
                     Console.Write("Posição Destino");
                     Posicao destino = Tela.LerPosicaoXadrez().ToPosicao();
 
@@ -34,9 +44,6 @@ namespace xadrez_console
 
 
                 }
-                
-                
-               
 
 
             }
