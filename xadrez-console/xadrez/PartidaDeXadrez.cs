@@ -35,6 +35,28 @@ namespace xadrez
             Turno++;
             MudaJogador();
         }
+        public void ValidarPosicaoDeOrigem(Posicao pos)
+        {
+            if(Tab.Peca(pos) == null)
+            {
+                throw new TabuleiroException("Nao existe peca na posicao de origem escolhida");
+            }
+            if (JogadorAtual != Tab.Peca(pos).Cor)
+            {
+                throw new TabuleiroException("A peca de origem escolhida n é sua");
+            }
+            if (!Tab.Peca(pos).ExisteMovimentosPossiveis())
+            {
+                throw new TabuleiroException("Nao ha movimentos possiveis para peça escolhida!");
+            }
+        }
+
+        public void ValidarPosicaoDeDestino(Posicao origem, Posicao destino)
+        {
+            if (!Tab.Peca(origem).PodeMoverPara(destino)){
+                throw new TabuleiroException("posicao de destino invalida!");
+            }
+        }
 
         private void MudaJogador()
         {
