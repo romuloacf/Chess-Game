@@ -63,7 +63,7 @@ namespace xadrez
             if (EstaEmXeque(JogadorAtual))
             {
                 DesfazMovimento(origem, destino, PecaCapturada);
-                throw new TabuleiroException("Vc n pode se colocar em cheque!");
+                throw new TabuleiroException("Vc n pode se colocar em xeque!");
             }
             if (EstaEmXeque(Adversaria(JogadorAtual)) == true)
             {
@@ -73,11 +73,15 @@ namespace xadrez
             {
                 xeque = false;
             }
-
-
-
-            Turno++;
-            MudaJogador();
+            if (TesteXequeMate(Adversaria(JogadorAtual)))
+            {
+                Terminada = true;
+            }
+            else
+            {
+                Turno++;
+                MudaJogador();
+            }
         }
         public void ValidarPosicaoDeOrigem(Posicao pos)
         {
@@ -182,6 +186,38 @@ namespace xadrez
             }
             return false;
         }
+
+        public bool TesteXequeMate(Cor cor)
+        {
+            if (!EstaEmXeque(cor))
+            {
+                return false;
+            }
+            foreach(Peca x in PecasEmJogo(cor))
+            {
+                bool[,] mat = x.MovimentosPossiveis();
+                for (int i=0; i<x.Tab.Linhas; i++)
+                {
+                    for (int j=0; j<Tab.Colunas; j++)
+                    {
+                        if (mat[i, j])
+                        {
+                            Posicao origem = x.Posicao;
+                            Posicao destino = new Posicao(i, j);
+                            Peca PecaCapturada = ExecutaMovimento(x.Posicao, destino);
+                            bool testeXeque = EstaEmXeque(cor);
+                            DesfazMovimento(origem, destino, PecaCapturada);
+                            if (!testeXeque)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
 
         public void ColocarNovaPeca(char coluna, int linha, Peca peca)
         {
